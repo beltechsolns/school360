@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <!-- Root Menu -->
+        <menuitem name="School360" id="school360_menu_root"/>
+
+        <!-- Submenus -->
+        <menuitem name="Dashboard" id="school360_menu_dashboard" parent="school360_menu_root" action=""/>
+        <menuitem name="Configuration" id="school360_menu_configuration" parent="school360_menu_root"/>
+
+        <!-- Academic Year Action -->
+        <menuitem id="menu_academic_year_config" name="Academic Year" parent="school360_menu_configuration"
+                  action="action_academic_year" sequence="1"/>
+
+        <!-- Settings Action -->
+        <menuitem name="Settings" id="res_config_setting_inherit" parent="school360_menu_configuration"
+                  action="school360_res_config_settings"/>
+    </data>
+</odoo>

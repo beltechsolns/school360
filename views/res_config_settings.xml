@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.school360</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="School 360" string="School 360" name="school360">
+
+                    <block title="Academic Settings" name="academic_settings">
+                        <setting help="Manage years, grading, and attendance">
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <label for="academic_year_id" class="o_form_label" style="min-width: 150px;"/>
+                                    <field name="academic_year_id" class="oe_inline"/>
+                                </div>
+                                <div class="mt8">
+                                    <label for="grading_system" class="o_form_label" style="min-width: 150px;"/>
+                                    <field name="grading_system" class="oe_inline"/>
+                                </div>
+                                <div class="mt16">
+                                    <field name="attendance_tracking"/>
+                                    <label for="attendance_tracking"/>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+
+                    <block title="Student Settings" name="student_settings">
+                        <setting>
+                            <div class="content-group">
+                                <div>
+                                    <field name="auto_gen_student_id"/>
+                                    <label for="auto_gen_student_id"/>
+                                </div>
+                                <div>
+                                    <field name="guardian_mandatory"/>
+                                    <label for="guardian_mandatory"/>
+                                </div>
+                                <div class="mt16 d-flex align-items-center">
+                                    <span class="fw-bold">Min Age:</span>
+                                    <field name="min_admission_age" class="oe_inline ms-2"
+                                           style="width: 50px !important;"/>
+                                    <span class="fw-bold ms-4">Max Age:</span>
+                                    <field name="max_admission_age" class="oe_inline ms-2"
+                                           style="width: 50px !important;"/>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+
+                    <block title="Finance Settings">
+                        <setting>
+                            <div class="content-group">
+                                <div>
+                                    <field name="enable_late_fees"/>
+                                    <label for="enable_late_fees"/>
+                                </div>
+                                <div class="mt8" invisible="not enable_late_fees">
+                                    <label for="late_fee_type" class="o_form_label" style="min-width: 150px;"/>
+                                    <field name="late_fee_type" class="oe_inline"/>
+                                </div>
+                                <div>
+                                    <field name="auto_validate_invoices"/>
+                                    <label for="auto_validate_invoices"/>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+                    <block title="Operational Settings">
+                        <setting>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="enable_parent_portal"/>
+                                    <label for="enable_parent_portal"/>
+                                </div>
+                                <div class="mt8">
+                                    <label for="academic_mode" class="o_form_label" style="min-width: 150px;"/>
+                                    <field name="academic_mode" class="oe_inline"/>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+    <!--</odoo>-->
+
+    <record id="school360_res_config_settings" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module': 'school360'}</field>
+    </record>
+</odoo>

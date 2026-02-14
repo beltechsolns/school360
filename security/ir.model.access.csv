@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_academic_year,access_academic_year,model_academic_year,,1,1,1,1
+access_res_config_settings,access_res_config_settings,model_res_config_settings,,1,1,0,0
