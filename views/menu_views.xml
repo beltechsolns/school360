@@ -4,7 +4,6 @@
         <menuitem name="School360" id="school360_menu_root"/>
 
         <!-- Submenus -->
-        <menuitem name="Dashboard" id="school360_menu_dashboard" parent="school360_menu_root" action=""/>
         <menuitem name="Configuration" id="school360_menu_configuration" parent="school360_menu_root"/>
 
         <!-- Academic Year Action -->
