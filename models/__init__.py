@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from . import academic_year
-from . import res_config_settings
+from . import school360_thread_mixin
+from . import school360_academic_year
+from . import school360_res_config_settings

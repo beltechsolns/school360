@@ -15,20 +15,21 @@
 
     # any module necessary for this one to work correctly
     "depends": ["base", "mail", "portal"],
+    
     "sequence": '0',
 
     'data': [
         # Security
-        'security/security_groups.xml',
+        'security/school360_security_groups.xml',
         'security/ir.model.access.csv',
-        'security/record_rules.xml',
+        'security/school360_record_rules.xml',
 
         # Actions
-        'views/academic_year_views.xml',
-        'views/res_config_settings.xml',
+        'views/school360_academic_year_views.xml',
+        'views/school360_res_config_settings.xml',
 
         # Menus
-        'views/menu_views.xml',
+        'views/school360_menu_views.xml',
 
         # Data
         'data/student_id_sequence.xml',
