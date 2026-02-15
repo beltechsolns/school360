@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_school360" model="ir.module.category">
+        <field name="name">school360</field>
+        <field name="sequence">10</field>
+        <field name="visible">1</field>
+    </record>
+    <!--  User Groups  -->
+    <!-- Parent Group -->
+    <record id="group_school_parent" model="res.groups">
+        <field name="name">Parent</field>
+        <field name="category_id" ref="module_category_school360"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_portal'))]"/>
+    </record>
+    <!-- Teacher Group -->
+    <record id="group_school_teacher" model="res.groups">
+        <field name="name">Teacher</field>
+        <field name="category_id" ref="school360_base.module_category_school360"/>
+    </record>
+    <!-- Finance Officer Group -->
+    <record id="group_school_finance_officer" model="res.groups">
+        <field name="name">Finance Officer</field>
+        <field name="category_id" ref="school360_base.module_category_school360"/>
+    </record>
+
+    <!-- HR Officer Group -->
+    <record id="group_school_hr_officer" model="res.groups">
+        <field name="name">HR Officer</field>
+        <field name="category_id" ref="school360_base.module_category_school360"/>
+    </record>
+    <!-- Principal Group -->
+    <record id="group_school_principal" model="res.groups">
+        <field name="name">Principal</field>
+        <field name="category_id" ref="school360_base.module_category_school360"/>
+    </record>
+    <!-- Administrator Group -->
+    <record id="group_school_administrator" model="res.groups">
+        <field name="name">school Admin</field>
+        <field name="category_id" ref="school360_base.module_category_school360"/>
+        <field name="implied_ids"
+               eval="[ (4, ref('group_school_principal')), (4, ref('group_school_finance_officer')), (4, ref('group_school_hr_officer'))]"/>
+    </record>
+</odoo>

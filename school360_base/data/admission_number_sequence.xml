@@ -1,0 +1,12 @@
+<odoo>
+    <!-- Admission Number Sequence -->
+    <record id="seq_admission_number" model="ir.sequence">
+        <field name="name">Admission Number</field>
+        <field name="code">school360_base.admission</field>
+        <field name="company_id" eval="1"/>
+        <field name="prefix">ADM/%(year)s/</field>
+        <field name="padding">4</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+</odoo>
