@@ -1,9 +1,0 @@
-<odoo>
-    <!-- Academic Year: Company Isolation -->
-    <record id="rule_academic_year_company" model="ir.rule">
-        <field name="name">Academic Year: Company Rule</field>
-        <field name="model_id" ref="model_academic_year"/>
-        <field name="domain_force">[('company_id','=',user.company_id.id)]</field>
-        <field name="groups" eval="[(4, ref('group_school_administrator'))]"/>
-    </record>
-</odoo>
