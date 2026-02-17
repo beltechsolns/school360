@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_academic_year_admin,academic.year.admin,model_school360_academic_year,school360.group_school_administrator,1,1,1,1
+access_academic_term_admin,academic.term.admin,model_school360_academic_term,school360.group_school_administrator,1,1,1,1
+access_academic_grade_admin,academic.grade.admin,model_school360_academic_grade,school360.group_school_administrator,1,1,1,1
+access_academic_section_admin,academic.section.admin,model_school360_academic_section,school360.group_school_administrator,1,1,1,1
+access_academic_subject_admin,academic.subject.admin,model_school360_academic_subject,school360.group_school_administrator,1,1,1,1
+access_academic_timetable_admin,academic.timetable.admin,model_school360_academic_timetable,school360.group_school_administrator,1,1,1,1
