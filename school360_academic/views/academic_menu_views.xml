@@ -1,0 +1,17 @@
+<odoo>
+    <!-- Top Menu -->
+    <menuitem id="menu_academic_root" name="Academic" parent="school360_base.school360_menu_root" sequence="10"/>
+
+    <!-- Academic Structure -->
+    <menuitem id="menu_academic_structure" name="Structure" parent="menu_academic_root" sequence="10"/>
+    <menuitem id="menu_academic_grade" name="Grades" parent="menu_academic_structure" action="action_academic_grade" sequence="10"/>
+    <menuitem id="menu_academic_section" name="Sections" parent="menu_academic_structure" action="action_academic_section" sequence="20"/>
+
+    <!-- Academic Planning -->
+    <menuitem id="menu_academic_planning" name="Planning" parent="menu_academic_root" sequence="20"/>
+    <menuitem id="menu_academic_subject" name="Subjects" parent="menu_academic_planning" action="action_academic_subject" sequence="10"/>
+    <menuitem id="menu_academic_timetable" name="Timetable" parent="menu_academic_planning" action="action_academic_timetable" sequence="20"/>
+
+    <!-- Configuration Inheritance -->
+    <menuitem id="menu_academic_term_config" name="Terms" parent="school360_base.school360_menu_configuration" action="action_academic_term" sequence="2"/>
+</odoo>
