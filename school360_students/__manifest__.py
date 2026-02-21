@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     'name': 'School360 Students',
     'version': '18.0.1.0.0',
@@ -6,7 +5,6 @@
     'summary': 'Complete student lifecycle management for School360 ERP',
     'description': 'School360 Students Module',
     'author': 'Solomon Yitayew',
-    'website': 'https://school360.com',
     'license': 'LGPL-3',
     'depends': [
         'school360_base',
@@ -14,11 +12,8 @@
         'portal',
     ],
     'data': [
-        # Security (order matters: groups → ACL → rules)
         'security/ir.model.access.csv',
         'security/record_rules.xml',
-
-        # Views
         'views/student_dashboard_views.xml',
         'views/student_views.xml',
         'views/enrollment_views.xml',

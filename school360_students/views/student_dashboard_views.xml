@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!-- Client Action linking to the OWL Component -->
         <record id="action_student_dashboard" model="ir.actions.client">
             <field name="name">Metrics Dashboard</field>
             <field name="tag">school360_students.dashboard</field>

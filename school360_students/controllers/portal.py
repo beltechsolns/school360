@@ -33,7 +33,6 @@ class StudentPortal(CustomerPortal):
 
         domain = [('guardian_ids', 'in', [partner.id])]
 
-        # Search
         searchbar_inputs = {
             'all': {'input': 'all', 'label': _('Search in All'), 'domain': []},
             'name': {'input': 'name', 'label': _('Name'),
@@ -47,7 +46,6 @@ class StudentPortal(CustomerPortal):
             search_domain = searchbar_inputs.get(search_in, {}).get('domain', [])
         domain += search_domain
 
-        # Sort
         searchbar_sortings = {
             'name': {'label': _('Name'), 'order': 'name asc'},
             'student_id': {'label': _('Student ID'), 'order': 'student_id asc'},
@@ -56,7 +54,6 @@ class StudentPortal(CustomerPortal):
             sortby = 'name'
         order = searchbar_sortings[sortby]['order']
 
-        # Pager
         student_count = Student.search_count(domain)
         pager = portal_pager(
             url='/my/students',

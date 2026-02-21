@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <menuitem id="menu_school360_students_root"
+                  name="Students"
+                  web_icon="school360_students,static/description/icon.png"
+                  sequence="2"/>
 
         <menuitem id="menu_school360_students"
                   name="Dashboard"
-                  parent="school360_base.school360_menu_root"
+                  parent="menu_school360_students_root"
                   action="action_student_dashboard"
-                  sequence="-101"/>
+                  sequence="10"/>
 
         <menuitem id="menu_student_student"
                   name="Students"
-                  parent="school360_base.school360_menu_root"
+                  parent="menu_school360_students_root"
                   action="action_student_student"
-                  sequence="-100"/>
+                  sequence="20"/>
 
         <menuitem id="menu_student_enrollment"
                   name="Enrollments"
-                  parent="school360_base.school360_menu_root"
+                  parent="menu_school360_students_root"
                   action="action_student_enrollment"
-                  sequence="-99"/>
+                  sequence="30"/>
 
     </data>
 </odoo>

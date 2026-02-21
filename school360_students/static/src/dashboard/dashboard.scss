@@ -1,6 +1,8 @@
 .o_student_dashboard {
     background-color: #f8f9fa;
     min-height: 100vh;
+    height: 100%;
+    overflow-y: auto;
 
     .o_stat_card {
         border: none;

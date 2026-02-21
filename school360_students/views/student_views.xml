@@ -188,7 +188,7 @@
                                     <strong><field name="name"/></strong>
                                     <div class="text-muted"><field name="student_id"/></div>
                                     <div>
-                                        <field name="grade_id"/> - <field name="section_id"/>
+                                        section: <field name="section_id"/> - grade: <field name="grade_id"/>
                                     </div>
                                     <div class="mt-1">
                                         <field name="status" widget="badge"
