@@ -1,0 +1,64 @@
+.o_student_dashboard {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+
+    .o_stat_card {
+        border: none;
+        border-radius: 12px;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+        &:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.05) !important;
+        }
+
+        .card-body {
+            padding: 1.8rem;
+        }
+
+        .bg-primary {
+            background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%) !important;
+        }
+
+        .bg-success {
+            background: linear-gradient(135deg, #198754 0%, #146c43 100%) !important;
+        }
+
+        .bg-info {
+            background: linear-gradient(135deg, #0dcaf0 0%, #0aa2c0 100%) !important;
+        }
+    }
+
+    .o_status_card {
+        border-right: none;
+        border-top: none;
+        border-bottom: none;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        background-color: #ffffff;
+
+        &:hover {
+            transform: translateX(6px);
+            background-color: #f8f9fa;
+        }
+    }
+
+    .o_chart_card {
+        border: none;
+        border-radius: 12px;
+        background: #ffffff;
+
+        .chart-container {
+            padding: 1rem;
+        }
+    }
+
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    h1 {
+        font-weight: 800;
+        letter-spacing: -0.5px;
+    }
+}

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="school360_students.Dashboard" owl="1">
+        <div class="o_student_dashboard container-fluid py-4">
+            <h1 class="mb-4 text-primary">Student Dashboard</h1>
+            
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm o_stat_card cursor-pointer" t-on-click="() => this.openStudents()">
+                        <div class="card-body">
+                            <h5 class="card-title text-muted mb-3">Total Students</h5>
+                            <div class="d-flex align-items-center">
+                                <div class="bg-primary text-white rounded p-3 me-3">
+                                    <i class="fa fa-users fa-2x"/>
+                                </div>
+                                <h2 class="mb-0 fw-bold" t-out="state.totalStudents"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm o_stat_card cursor-pointer" t-on-click="() => this.openStudents('active')">
+                        <div class="card-body">
+                            <h5 class="card-title text-muted mb-3">Active Students</h5>
+                            <div class="d-flex align-items-center">
+                                <div class="bg-success text-white rounded p-3 me-3">
+                                   <i class="fa fa-smile-o fa-2x"/>
+                                </div>
+                                <h2 class="mb-0 fw-bold" t-out="state.activeStudents"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm o_stat_card cursor-pointer" t-on-click="() => this.openEnrollments()">
+                        <div class="card-body">
+                            <h5 class="card-title text-muted mb-3">Total Enrollments</h5>
+                            <div class="d-flex align-items-center">
+                                <div class="bg-info text-white rounded p-3 me-3">
+                                    <i class="fa fa-graduation-cap fa-2x"/>
+                                </div>
+                                <h2 class="mb-0 fw-bold" t-out="state.totalEnrollments"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="mb-3 ">Status Breakdown</h3>
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <div class="card h-100 shadow-sm border-start border-4 border-warning o_status_card cursor-pointer" t-on-click="() => this.openStudents('draft')">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <span class="fs-5 text-muted">Draft</span>
+                            <span class="fs-4 fw-bold text-dark" t-out="state.statusCounts.draft"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100 shadow-sm border-start border-4 border-success o_status_card cursor-pointer" t-on-click="() => this.openStudents('active')">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <span class="fs-5 text-muted">Active</span>
+                            <span class="fs-4 fw-bold text-dark" t-out="state.statusCounts.active"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100 shadow-sm border-start border-4 border-primary o_status_card cursor-pointer" t-on-click="() => this.openStudents('graduated')">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <span class="fs-5 text-muted">Graduated</span>
+                            <span class="fs-4 fw-bold text-dark" t-out="state.statusCounts.graduated"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100 shadow-sm border-start border-4 border-danger o_status_card cursor-pointer" t-on-click="() => this.openStudents('dropped')">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <span class="fs-5 text-muted">Dropped</span>
+                            <span class="fs-4 fw-bold text-dark" t-out="state.statusCounts.dropped"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="mt-5 mb-3 border-bottom pb-2">Analytics</h3>
+            <div class="row g-4 mb-5">
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm o_chart_card">
+                        <div class="card-body">
+                            <h5 class="card-title text-muted mb-4 text-center">Student Status Distribution</h5>
+                            <div class="chart-container" style="position: relative; height:300px; width:100%">
+                                <canvas t-ref="pieChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm o_chart_card">
+                        <div class="card-body">
+                            <h5 class="card-title text-muted mb-4 text-center">Enrollments per Grade</h5>
+                            <div class="chart-container" style="position: relative; height:300px; width:100%">
+                                <canvas t-ref="barChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </t>
+
+</templates>

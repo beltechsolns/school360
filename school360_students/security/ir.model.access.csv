@@ -1,0 +1,20 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_student_student_admin,student.student admin,model_student_student,school360_base.group_school_administrator,1,1,1,1
+access_student_student_principal,student.student principal,model_student_student,school360_base.group_school_principal,1,1,0,0
+access_student_student_teacher,student.student teacher,model_student_student,school360_base.group_school_teacher,1,0,0,0
+access_student_student_finance,student.student finance,model_student_student,school360_base.group_school_finance_officer,1,0,0,0
+access_student_student_parent,student.student parent,model_student_student,school360_base.group_school_parent,1,0,0,0
+access_student_student_portal,student.student portal,model_student_student,base.group_portal,1,0,0,0
+access_student_enrollment_admin,student.enrollment admin,model_student_enrollment,school360_base.group_school_administrator,1,1,1,1
+access_student_enrollment_principal,student.enrollment principal,model_student_enrollment,school360_base.group_school_principal,1,1,0,0
+access_student_enrollment_teacher,student.enrollment teacher,model_student_enrollment,school360_base.group_school_teacher,1,0,0,0
+access_student_enrollment_finance,student.enrollment finance,model_student_enrollment,school360_base.group_school_finance_officer,1,0,0,0
+access_student_enrollment_parent,student.enrollment parent,model_student_enrollment,school360_base.group_school_parent,1,0,0,0
+access_student_enrollment_portal,student.enrollment portal,model_student_enrollment,base.group_portal,1,0,0,0
+access_student_guardian_admin,student.guardian admin,model_student_guardian,school360_base.group_school_administrator,1,1,1,1
+access_student_guardian_principal,student.guardian principal,model_student_guardian,school360_base.group_school_principal,1,1,0,0
+access_student_guardian_teacher,student.guardian teacher,model_student_guardian,school360_base.group_school_teacher,1,0,0,0
+access_student_guardian_finance,student.guardian finance,model_student_guardian,school360_base.group_school_finance_officer,1,0,0,0
+access_student_guardian_parent,student.guardian parent,model_student_guardian,school360_base.group_school_parent,1,0,0,0
+access_student_guardian_portal,student.guardian portal,model_student_guardian,base.group_portal,1,0,0,0
+

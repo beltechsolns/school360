@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="menu_school360_students"
+                  name="Dashboard"
+                  parent="school360_base.school360_menu_root"
+                  action="action_student_dashboard"
+                  sequence="-101"/>
+
+        <menuitem id="menu_student_student"
+                  name="Students"
+                  parent="school360_base.school360_menu_root"
+                  action="action_student_student"
+                  sequence="-100"/>
+
+        <menuitem id="menu_student_enrollment"
+                  name="Enrollments"
+                  parent="school360_base.school360_menu_root"
+                  action="action_student_enrollment"
+                  sequence="-99"/>
+
+    </data>
+</odoo>

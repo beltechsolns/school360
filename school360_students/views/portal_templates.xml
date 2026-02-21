@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="portal_my_students" name="My Students">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Students</t>
+            </t>
+
+            <t t-if="not students">
+                <div class="alert alert-info" role="alert">
+                    No students found.
+                </div>
+            </t>
+
+            <div class="o_portal_student_details mt-3">
+                <t t-foreach="students" t-as="student">
+                <div class="student-card" t-att-data-student-id="student.id">
+                    <div class="d-flex align-items-center">
+                        <t t-if="student.photo">
+                            <img t-att-src="image_data_uri(student.photo)"
+                                 class="student-photo me-3"
+                                 t-att-alt="student.name"/>
+                        </t>
+                        <div class="flex-grow-1">
+                            <h3 class="mb-1">
+                                <a t-attf-href="/my/student/#{student.id}">
+                                    <t t-out="student.name"/>
+                                </a>
+                            </h3>
+                            <div class="student-info">
+                                <label>Student ID:</label>
+                                <span t-out="student.student_id"/>
+                            </div>
+                            <div class="student-info">
+                                <label>Grade:</label>
+                                <span t-out="student.grade_id"/>
+                                <label class="ms-3">Section:</label>
+                                <span t-out="student.section_id"/>
+                            </div>
+                        </div>
+                        <span t-attf-class="student-status #{student.status}">
+                            <t t-out="student.status"/>
+                        </span>
+                    </div>
+                </div>
+                </t>
+            </div>
+
+            <div t-if="pager" class="o_portal_pager text-center mt-3">
+                <t t-call="portal.pager"/>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_student_page" name="Student Detail">
+        <t t-call="portal.portal_layout">
+            <div class="student-card">
+                <div class="d-flex align-items-start mb-4">
+                    <t t-if="student.photo">
+                        <img t-att-src="image_data_uri(student.photo)"
+                             class="student-photo me-4"
+                             t-att-alt="student.name"/>
+                    </t>
+                    <div>
+                        <h1><t t-out="student.name"/></h1>
+                        <span t-attf-class="student-status #{student.status}">
+                            <t t-out="student.status"/>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="student-info">
+                            <label>Student ID:</label>
+                            <span t-out="student.student_id"/>
+                        </div>
+                        <div class="student-info">
+                            <label>Admission Number:</label>
+                            <span t-out="student.admission_number"/>
+                        </div>
+                        <div class="student-info">
+                            <label>Date of Birth:</label>
+                            <span t-field="student.date_of_birth"/>
+                        </div>
+                        <div class="student-info">
+                            <label>Age:</label>
+                            <span t-out="student.age"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="student-info">
+                            <label>Grade:</label>
+                            <span t-out="student.grade_id"/>
+                        </div>
+                        <div class="student-info">
+                            <label>Section:</label>
+                            <span t-out="student.section_id"/>
+                        </div>
+                        <div class="student-info">
+                            <label>Gender:</label>
+                            <span t-out="student.gender"/>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="mt-4">Enrollment History</h3>
+                <t t-if="enrollments">
+                    <table class="enrollment-table">
+                        <thead>
+                            <tr>
+                                <th class="sortable">Academic Year</th>
+                                <th class="sortable">Grade</th>
+                                <th class="sortable">Section</th>
+                                <th class="sortable date-column">Enrolled</th>
+                                <th class="sortable date-column">Ended</th>
+                                <th class="sortable">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="enrollments" t-as="enroll">
+                                <tr>
+                                    <td t-out="enroll.academic_year_id.name"/>
+                                    <td t-out="enroll.grade_id"/>
+                                    <td t-out="enroll.section_id"/>
+                                    <td><span t-field="enroll.enrollment_date"/></td>
+                                    <td><span t-field="enroll.graduation_date"/></td>
+                                    <td>
+                                        <span t-attf-class="enrollment-badge #{enroll.status}">
+                                            <t t-out="enroll.status"/>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </t>
+                <t t-else="">
+                    <p class="text-muted">No enrollment records found.</p>
+                </t>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_student_enrollments" name="Student Enrollments">
+        <t t-call="portal.portal_layout">
+            <h2>
+                Enrollment History — <t t-out="student.name"/>
+            </h2>
+            <t t-if="enrollments">
+                <table class="enrollment-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable">Academic Year</th>
+                            <th class="sortable">Grade</th>
+                            <th class="sortable">Section</th>
+                            <th class="sortable date-column">Enrolled</th>
+                            <th class="sortable date-column">Ended</th>
+                            <th class="sortable">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="enrollments" t-as="enroll">
+                            <tr>
+                                <td t-out="enroll.academic_year_id.name"/>
+                                <td t-out="enroll.grade_id"/>
+                                <td t-out="enroll.section_id"/>
+                                <td><span t-field="enroll.enrollment_date"/></td>
+                                <td><span t-field="enroll.graduation_date"/></td>
+                                <td>
+                                    <span t-attf-class="enrollment-badge #{enroll.status}">
+                                        <t t-out="enroll.status"/>
+                                    </span>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </t>
+            <t t-else="">
+                <p class="text-muted">No enrollment records found.</p>
+            </t>
+        </t>
+    </template>
+
+    <!-- ══════════════════════════════════════════════════════
+         Portal Home: Add link to Students
+         ══════════════════════════════════════════════════════ -->
+    <template id="portal_my_home_menu_students" name="Portal layout : student menu entries" inherit_id="portal.portal_breadcrumbs" priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'student' or student" t-attf-class="breadcrumb-item #{'active ' if not student else ''}">
+                <a t-if="student" t-attf-href="/my/students?{{ keep_query() }}">Students</a>
+                <t t-else="">Students</t>
+            </li>
+            <li t-if="student" class="breadcrumb-item active">
+                <span t-field="student.name"/>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_students" name="Show Students" inherit_id="portal.portal_my_home" priority="20">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Students</t>
+                <t t-set="url" t-value="'/my/students'"/>
+                <t t-set="placeholder_count" t-value="'student_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>
