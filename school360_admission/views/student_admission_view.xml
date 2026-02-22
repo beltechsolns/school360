@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="view_student_admission_form" model="ir.ui.view">
+            <field name="name">student.admission.form</field>
+            <field name="model">student.admission</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_submit" string="Submit Application" type="object"
+                                invisible="status != 'draft'" class="btn-primary"
+                                groups="school360_base.group_school_parent,school360_base.group_school_administrator"/>
+
+                        <button name="action_verify" string="Verify Documents" type="object"
+                                invisible="status != 'submitted'" class="btn-info"
+                                groups="school360_base.group_school_principal,school360_base.group_school_administrator"/>
+
+                        <button name="action_accept" string="Accept &amp; Create Student" type="object"
+                                invisible="status != 'verified'" class="btn-success"
+                                groups="school360_base.group_school_principal,school360_base.group_school_administrator"/>
+
+                        <button name="action_reject" string="Reject" type="object"
+                                invisible="status not in ['submitted', 'verified']" class="btn-danger"
+                                groups="school360_base.group_school_principal,school360_base.group_school_administrator"/>
+
+                        <field name="status" widget="statusbar" statusbar_visible="draft,submitted,verified,accepted"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Applicant Full Name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="date_of_birth"/>
+                                <field name="gender"/>
+                                <field name="grade_id"/>
+                                <field name="section_id"/>
+                                <field name="academic_year_id"/>
+                            </group>
+                            <group>
+                                <field name="admission_number"/>
+                                <field name="student_id"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Guardians">
+                                <field name="guardian_ids"/>
+                            </page>
+                            <page string="Documents">
+                                <field name="attachment_ids">
+                                    <list editable="bottom">
+                                        <field name="description"/>
+                                        <field name="file" filename="description"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="student_admission_list_view" model="ir.ui.view">
+            <field name="name">student.admission.list</field>
+            <field name="model">student.admission</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="admission_number"/>
+                    <field name="student_id"/>
+                    <field name="grade_id"/>
+                    <field name="status" widget="badge"
+                           decoration-info="status == 'draft'"
+                           decoration-warning="status == 'submitted'"
+                           decoration-success="status == 'accepted'"/>
+                    <field name="application_date"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_student_admission" model="ir.actions.act_window">
+            <field name="name">Student Admission</field>
+            <field name="res_model">student.admission</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem id="menu_student_admission_root" name="Student Admission" sequence="10"/>
+        <menuitem id="menu_student_admission" name="Admission"
+                  parent="menu_student_admission_root" action="action_student_admission" sequence="15"/>
+    </data>
+</odoo>
