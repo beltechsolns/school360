@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_academic_grade_form_inherit_students" model="ir.ui.view">
+            <field name="name">academic.grade.form.inherit.students</field>
+            <field name="model">school360_academic.grade</field>
+            <field name="inherit_id" ref="school360_academic.view_academic_grade_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='students']" position="inside">
+                    <field name="student_ids">
+                        <list create="false" edit="false">
+                            <field name="name"/>
+                            <field name="admission_number"/>
+                            <field name="gender"/>
+                            <field name="age"/>
+                            <field name="section_id"/>
+                            <field name="status"/>
+                        </list>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_academic_section_form_inherit_students" model="ir.ui.view">
+            <field name="name">academic.section.form.inherit.students</field>
+            <field name="model">school360_academic.section</field>
+            <field name="inherit_id" ref="school360_academic.view_academic_section_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='students']" position="inside">
+                    <field name="student_ids">
+                        <list create="false" edit="false">
+                            <field name="name"/>
+                            <field name="gender"/>
+                            <field name="status"/>
+                        </list>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

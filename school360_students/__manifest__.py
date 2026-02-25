@@ -6,11 +6,7 @@
     'description': 'School360 Students Module',
     'author': 'Solomon Yitayew',
     'license': 'LGPL-3',
-    'depends': [
-        'school360_base',
-        'mail',
-        'portal',
-    ],
+    "depends": ["school360_base", "school360_academic", "mail", "portal"],
     'data': [
         'security/ir.model.access.csv',
         'security/record_rules.xml',
@@ -18,6 +14,7 @@
         'views/student_views.xml',
         'views/enrollment_views.xml',
         'views/student_menu.xml',
+        'views/academic_inherit_views.xml',
         'views/portal_templates.xml',
     ],
     'assets': {

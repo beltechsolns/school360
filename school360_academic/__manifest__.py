@@ -1,0 +1,21 @@
+{
+    "name": "School360 Academic",
+    "version": "1.0",
+    "summary": "Manage Grades, Sections, Subjects, and Timetables",
+    "category": "Education",
+    "author": "beltechsolns",
+    # "depends": ["school360_base", "school360_students"],
+    "depends": ["school360_base", "hr"],
+    "data": [
+        "security/academic_security.xml",
+        "security/ir.model.access.csv",
+        "views/academic_term_views.xml",
+        "views/academic_grade_views.xml",
+        "views/academic_section_views.xml",
+        "views/academic_subject_views.xml",
+        "views/academic_timetable_views.xml",
+        "views/academic_menu_views.xml",
+    ],
+    "installable": True,
+    "application": True,
+}

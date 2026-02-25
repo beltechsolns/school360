@@ -63,9 +63,17 @@ class StudentStudent(models.Model):
         'res.partner', string='Guardian Partners',
         compute='_compute_guardian_ids', store=True,
     )
-
-    grade_id = fields.Char(string='Current Grade', tracking=True)
-    section_id = fields.Char(string='Current Section', tracking=True)
+    grade_id = fields.Many2one(
+        'school360_academic.grade',
+        string='Grade',
+        tracking=True,
+    )
+    # grade_id = fields.Char(string='Current Grade', tracking=True)
+    section_id = fields.Many2one(
+        'school360_academic.section',
+        string='Section'
+    )
+    # section_id = fields.Char(string='Current Section', tracking=True)
 
     photo = fields.Binary(string='Photo')
     notes = fields.Text(string='Notes')
@@ -96,7 +104,7 @@ class StudentStudent(models.Model):
             if rec.date_of_birth:
                 dob = rec.date_of_birth
                 rec.age = today.year - dob.year - (
-                    (today.month, today.day) < (dob.month, dob.day)
+                        (today.month, today.day) < (dob.month, dob.day)
                 )
             else:
                 rec.age = 0
@@ -121,11 +129,11 @@ class StudentStudent(models.Model):
         for vals in vals_list:
             if not vals.get('student_id'):
                 vals['student_id'] = (
-                    self.env['ir.sequence'].next_by_code('school360_base.student') or '/'
+                        self.env['ir.sequence'].next_by_code('school360_base.student') or '/'
                 )
             if not vals.get('admission_number'):
                 vals['admission_number'] = (
-                    self.env['ir.sequence'].next_by_code('school360_base.admission') or '/'
+                        self.env['ir.sequence'].next_by_code('school360_base.admission') or '/'
                 )
         return super().create(vals_list)
 
@@ -170,7 +178,7 @@ class StudentStudent(models.Model):
         self.ensure_one()
         if not all([new_grade, new_year]):
             return False
-            
+
         self.env['student.enrollment'].create({
             'student_id': self.id,
             'academic_year_id': new_year.id if hasattr(new_year, 'id') else new_year,
@@ -178,7 +186,7 @@ class StudentStudent(models.Model):
             'section_id': new_section or self.section_id,
             'status': 'active',
         })
-        
+
         self.write({
             'grade_id': new_grade,
             'section_id': new_section or self.section_id,
@@ -197,7 +205,7 @@ class StudentStudent(models.Model):
                 continue
             dob = rec.date_of_birth
             age = today.year - dob.year - (
-                (today.month, today.day) < (dob.month, dob.day)
+                    (today.month, today.day) < (dob.month, dob.day)
             )
             if age < min_age or age > max_age:
                 raise ValidationError(_(

@@ -19,12 +19,19 @@ class StudentEnrollment(models.Model):
         required=True, tracking=True,
     )
 
-    grade_id = fields.Char(string='Grade', required=True, tracking=True)
-    section_id = fields.Char(string='Section', required=True, tracking=True)
+    grade_id = fields.Many2one(
+        'school360_academic.grade',
+        string='Grade',
+        tracking=True,
+    )
+    section_id = fields.Many2one(
+        'school360_academic.section',
+        string='Section'
+    )
 
     enrollment_date = fields.Date(
         string='Enrollment Date', required=True,
-        default=fields.Date.today, 
+        default=fields.Date.today,
         tracking=True,
     )
     graduation_date = fields.Date(
@@ -40,7 +47,7 @@ class StudentEnrollment(models.Model):
 
     company_id = fields.Many2one(
         'res.company', string='School', required=True,
-        default=lambda self: self.env.company, tracking=True, index=True,
+        default=lambda self: self.env.company, tracking=True, index=True, readonly=True
     )
     notes = fields.Text(string='Notes')
 

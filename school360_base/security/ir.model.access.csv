@@ -1,5 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_academic_year_admin,access_academic_year_admin,model_school360_base_academic_year,school360_base.group_school_administrator,1,1,1,1
-access_academic_year_principal,access_academic_year_principal,model_school360_base_academic_year,school360_base.group_school_principal,1,0,0,0
+access_academic_year_admin,access_academic_year_admin,model_school360_base_academic_year,,1,1,1,1
+access_academic_year_principal,access_academic_year_principal,model_school360_base_academic_year,,1,0,0,0
 
 access_res_config_settings,access_res_config_settings,model_res_config_settings,school360_base.group_school_administrator,1,1,0,0

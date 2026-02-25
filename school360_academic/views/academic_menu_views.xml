@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <menuitem id="menu_academic_root"
+              name="Academic"
+              sequence="10"/>
+
+    <!-- Dashboard -->
+    <menuitem id="menu_academic_dashboard"
+              name="Dashboard"
+              parent="menu_academic_root"
+              sequence="1"/>
+
+    <!-- Structure -->
+    <menuitem id="menu_academic_structure"
+              name="Structure"
+              parent="menu_academic_root"
+              sequence="5"/>
+
+    <menuitem id="menu_academic_grade_md"
+              name="Grades"
+              parent="menu_academic_structure"
+              action="action_academic_grade"
+              sequence="10"/>
+
+    <menuitem id="menu_academic_section_md"
+              name="Sections"
+              parent="menu_academic_structure"
+              action="action_academic_section"
+              sequence="20"/>
+
+    <menuitem id="menu_academic_subject_md"
+              name="Subjects"
+              parent="menu_academic_structure"
+              action="action_academic_subject"
+              sequence="30"/>
+
+    <!-- Operations -->
+    <menuitem id="menu_academic_operations"
+              name="Operations"
+              parent="menu_academic_root"
+              sequence="20"/>
+
+    <menuitem id="menu_academic_timetable_op"
+              name="Class Timetable"
+              parent="menu_academic_operations"
+              action="action_academic_timetable"
+              sequence="10"/>
+
+    <!-- Configuration -->
+    <menuitem id="menu_academic_config_root"
+              name="Configuration"
+              parent="menu_academic_root"
+              sequence="100"
+              groups="school360_base.group_school_administrator"/>
+
+    <menuitem id="menu_academic_term_config"
+              name="Academic Terms"
+              parent="menu_academic_config_root"
+              action="action_academic_term"
+              sequence="10"/>
+
+</odoo>

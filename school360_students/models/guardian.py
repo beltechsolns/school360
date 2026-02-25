@@ -7,7 +7,7 @@ class StudentGuardian(models.Model):
     _name = 'student.guardian'
     _description = 'Student–Guardian Relationship'
     _inherit = ['school360_base.thread.mixin']
-    _rec_name = 'guardian_id'
+    # _rec_name = 'guardian_id'
 
     student_id = fields.Many2one(
         'student.student', string='Student', required=True,
