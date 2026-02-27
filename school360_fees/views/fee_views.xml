@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_fee_list" model="ir.ui.view">
+        <field name="name">fees.fees.list</field>
+        <field name="model">fees.fees</field>
+        <field name="arch" type="xml">
+            <list decoration-success="state == 'paid'" decoration-info="state == 'partially_paid'"
+                  decoration-muted="state == 'unpaid'">
+                <field name="payment_date"/>
+                <field name="student_id"/>
+                <field name="fee_structure_id"/>
+                <field name="net_amount_due" widget="monetary"/>
+                <field name="amount_paid" widget="monetary"/>
+                <field name="amount_remaining" widget="monetary" sum="Total Remaining"/>
+                <field name="state" widget="badge" decoration-success="state == 'paid'"
+                       decoration-warning="state == 'partially_paid'" decoration-danger="state == 'unpaid'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_fee_form" model="ir.ui.view">
+        <field name="name">fees.fees.form</field>
+        <field name="model">fees.fees</field>
+        <field name="arch" type="xml">
+            <form string="Fee Payment">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="unpaid,partially_paid,paid"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="payment_reference" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Student Information">
+                            <field name="student_id" readonly="state == 'paid'"/>
+                            <field name="fee_structure_id" readonly="state == 'paid'"/>
+                            <field name="payment_date" readonly="state == 'paid'"/>
+                        </group>
+                        <group string="Payment Status">
+                            <field name="currency_id" invisible="1"/>
+                            <field name="total_amount" widget="monetary"/>
+                            <field name="amount_paid" widget="monetary" readonly="state == 'paid'"/>
+                            <field name="net_amount_due" widget="monetary" decoration-bf="1"/>
+                            <field name="amount_remaining" widget="monetary" decoration-danger="amount_remaining > 0"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Reductions">
+                            <field name="has_scholarship"/>
+                            <field name="scholarship_type" invisible="not has_scholarship" required="has_scholarship"/>
+                            <field name="has_discount"/>
+                            <field name="discount_percent" invisible="not has_discount"/>
+                        </group>
+                        <group string="Extra Details">
+                            <field name="payment_method" readonly="state == 'paid'"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_student_fees" model="ir.actions.act_window">
+        <field name="name">Student Fees</field>
+        <field name="res_model">fees.fees</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Record a new student payment</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_student_fees_root" name="Student Fees" sequence="10"/>
+    <menuitem id="menu_student_fees" name="Fees"
+              parent="menu_student_fees_root" action="action_student_fees" sequence="15"/>
+</odoo>

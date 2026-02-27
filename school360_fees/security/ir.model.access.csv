@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fees_structure_admin,fees_structure_admin,model_fees_structure,school360_base.group_school_administrator,1,1,1,1
+access_fees_structure_finance,fees_structure_finance,model_fees_structure,school360_base.group_school_finance_officer,1,1,1,1
+access_fees_structure_principal,fees_structure_principal,model_fees_structure,school360_base.group_school_principal,1,0,0,0
+access_fees_structure_teacher,fees_structure_teacher,model_fees_structure,school360_base.group_school_teacher,1,0,0,0
+access_fees_structure_parent,fees_structure_parent,model_fees_structure,school360_base.group_school_parent,1,0,0,0
+
+access_fees_fees_admin,fees_fees_admin,model_fees_fees,school360_base.group_school_administrator,1,1,1,1
+access_fees_fees_finance,fees_fees_finance,model_fees_fees,school360_base.group_school_finance_officer,1,1,1,1
+access_fees_fees_principal,fees_fees_principal,model_fees_fees,school360_base.group_school_principal,1,0,0,0
+access_fees_fees_teacher,fees_fees_teacher,model_fees_fees,school360_base.group_school_teacher,1,0,0,0
+access_fees_fees_parent,fees_fees_parent,model_fees_fees,school360_base.group_school_parent,1,0,0,0
+access_fees_fees_portal,fees_fees_portal,model_fees_fees,base.group_portal,1,0,0,0
