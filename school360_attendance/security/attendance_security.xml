@@ -1,0 +1,22 @@
+<odoo>
+    <!-- Attendance Admin: inherit School Admin -->
+    <record id="group_attendance_admin" model="res.groups">
+        <field name="name">Attendance Admin</field>
+        <field name="category_id" ref="school360_base.module_category_school360"/>
+        <field name="implied_ids" eval="[(4, ref('school360_base.group_school_administrator'))]"/>
+    </record>
+
+    <!-- Teacher: inherit Teacher group -->
+    <record id="group_attendance_teacher" model="res.groups">
+        <field name="name">Teacher (Attendance)</field>
+        <field name="category_id" ref="school360_base.module_category_school360"/>
+        <field name="implied_ids" eval="[(4, ref('school360_base.group_school_teacher'))]"/>
+    </record>
+
+    <!-- Parent: inherit Parent group -->
+    <record id="group_attendance_parent" model="res.groups">
+        <field name="name">Parent (Attendance)</field>
+        <field name="category_id" ref="school360_base.module_category_school360"/>
+        <field name="implied_ids" eval="[(4, ref('school360_base.group_school_parent'))]"/>
+    </record>
+</odoo>

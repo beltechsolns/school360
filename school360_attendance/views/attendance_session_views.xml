@@ -1,0 +1,69 @@
+<odoo>
+    <!-- Attendance Session Form -->
+    <record id="view_attendance_session_form" model="ir.ui.view">
+        <field name="name">attendance.session.form</field>
+        <field name="model">attendance.session</field>
+        <field name="arch" type="xml">
+            <form string="Attendance Session">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="academic_year_id"/>
+                            <field name="grade_id"/>
+                            <field name="section_id"/>
+                            <field name="subject_id"/>
+                        </group>
+                        <group>
+                             <field name="teacher_id"/>
+                            <field name="period_number"/>
+                            <field name="state"/>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Attendance Lines">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="student_id"/>
+                                    <field name="status"/>
+                                    <field name="remarks"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Attendance Session list -->
+    <record id="view_attendance_session_tree" model="ir.ui.view">
+        <field name="name">attendance.session.tree</field>
+        <field name="model">attendance.session</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="date"/>
+                <field name="grade_id"/>
+                <field name="section_id"/>
+                <field name="period_number"/>
+                <field name="teacher_id"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_attendance_session" model="ir.actions.act_window">
+        <field name="name">Attendance Sessions</field>
+        <field name="res_model">attendance.session</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Attendance Session
+            </p>
+        </field>
+    </record>
+</odoo>

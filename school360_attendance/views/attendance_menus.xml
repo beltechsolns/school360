@@ -1,0 +1,51 @@
+<odoo>
+    <!-- Root menu for Attendance under School360 -->
+    <menuitem id="menu_school360_attendance_root"
+              name="Attendance"
+              sequence="10"/>
+
+    <!-- Attendance Sessions -->
+    <menuitem id="menu_attendance_sessions"
+              name="Sessions"
+              parent="menu_school360_attendance_root"
+              sequence="1"/>
+
+    <record id="action_attendance_sessions" model="ir.actions.act_window">
+        <field name="name">Attendance Sessions</field>
+        <field name="res_model">attendance.session</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_attendance_sessions_sub"
+              name="Attendance Sessions"
+              parent="menu_attendance_sessions"
+              action="action_attendance_sessions"
+              sequence="1"/>
+
+    <!-- Attendance Lines -->
+    <menuitem id="menu_attendance_lines"
+              name="Attendance Lines"
+              parent="menu_school360_attendance_root"
+              sequence="2"/>
+
+
+    <menuitem id="menu_attendance_lines_sub"
+              name="Student Attendance"
+              parent="menu_attendance_lines"
+              action="action_attendance_lines"
+              sequence="1"/>
+
+    <!-- Import Wizard -->
+    <menuitem id="menu_attendance_import"
+              name="Import Attendance"
+              parent="menu_school360_attendance_root"
+              sequence="3"/>
+
+
+    <menuitem id="menu_attendance_import_sub"
+              name="Import Wizard"
+              parent="menu_attendance_import"
+              action="action_attendance_import_wizard"
+              sequence="1"/>
+
+</odoo>
