@@ -1,0 +1,10 @@
+<odoo>
+    <record id="rule_teacher_exam_results" model="ir.rule">
+        <field name="name">Teacher: Own Subject Results</field>
+        <field name="model_id" ref="model_exam_result"/>
+        <field name="domain_force">
+            [('subject_id.teacher_ids.user_id', '=', user.id)]
+        </field>
+        <field name="groups" eval="[(4, ref('school360_base.group_school_teacher'))]"/>
+    </record>
+</odoo>

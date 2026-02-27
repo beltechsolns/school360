@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- ========================= -->
+    <!-- Root Menu -->
+    <!-- ========================= -->
+    <menuitem
+        id="menu_exam_root"
+        name="Exams"
+        sequence="40"
+    />
+
+    <!-- ========================= -->
+    <!-- Exams Menu -->
+    <!-- ========================= -->
+    <menuitem
+        id="menu_exam_exam"
+        name="Exams"
+        parent="menu_exam_root"
+        action="action_exam_exam"
+        sequence="10"
+    />
+
+    <!-- ========================= -->
+    <!-- Results Menu -->
+    <!-- ========================= -->
+    <menuitem
+        id="menu_exam_result"
+        name="Results"
+        parent="menu_exam_root"
+        action="action_exam_result"
+        sequence="20"
+    />
+
+</odoo>

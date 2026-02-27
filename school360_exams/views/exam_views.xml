@@ -1,0 +1,70 @@
+<odoo>
+    <record id="view_exam_tree" model="ir.ui.view">
+        <field name="name">exam.exam.tree</field>
+        <field name="model">exam.exam</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="exam_type"/>
+                <field name="academic_year_id"/>
+                <field name="grade_id"/>
+                <field name="section_id"/>
+                <field name="subject_id"/>
+                <field name="exam_date"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_exam_form" model="ir.ui.view">
+        <field name="name">exam.exam.form</field>
+        <field name="model">exam.exam</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                              <field name="name"/>
+                            <field name="exam_type"/>
+                            <field name="academic_year_id"/>
+                            <field name="grade_id"/>
+                        </group>
+                        <group>
+                            <field name="section_id"/>
+                            <field name="subject_id"/>
+                            <field name="exam_date"/>
+                            <field name="notes"/>
+                        </group>
+
+                    </group>
+
+                    <notebook>
+                    <page string="Student Results">
+                        <field name="result_ids">
+                            <list editable="bottom">
+                                <field name="student_id"/>
+                                <field name="marks_obtained"/>
+                                <field name="grade" readonly="1"/>
+                                <field name="remarks"/>
+                            </list>
+                        </field>
+                    </page>
+                </notebook>
+
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_exam_exam" model="ir.actions.act_window">
+        <field name="name">Exams</field>
+        <field name="res_model">exam.exam</field>
+        <field name="view_mode">list,form</field>
+         <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a New Exam!
+            </p>
+        </field>
+    </record>
+
+</odoo>

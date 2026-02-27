@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_exam_admin,access.exam.admin,model_exam_exam,school360_base.group_school_administrator,1,1,1,1
+access_result_admin,access.result.admin,model_exam_result,school360_base.group_school_administrator,1,1,1,1
+access_teacher_result,access.result.teacher,model_exam_result,school360_base.group_school_teacher,1,1,1,0
+access_parent_result,access.result.parent,model_exam_result,school360_base.group_school_parent,1,0,0,0
