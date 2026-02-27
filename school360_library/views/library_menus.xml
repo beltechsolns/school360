@@ -1,0 +1,27 @@
+<odoo>
+
+    <!-- Root Menu -->
+    <menuitem id="menu_school360_library_root"
+              name="Library"
+              sequence="40"/>
+
+    <!-- Submenus -->
+    <menuitem id="menu_library_books"
+              name="Books"
+              parent="menu_school360_library_root"
+              action="action_library_books"
+              sequence="1"/>
+
+    <menuitem id="menu_library_borrow"
+              name="Borrow Records"
+              parent="menu_school360_library_root"
+              action="action_library_borrow"
+              sequence="2"/>
+
+    <menuitem id="menu_library_category"
+              name="Categories"
+              parent="menu_school360_library_root"
+              action="action_library_category"
+              sequence="3"/>
+
+</odoo>

@@ -1,0 +1,14 @@
+<odoo>
+
+    <!-- Groups -->
+    <record id="group_library_admin" model="res.groups">
+        <field name="name">Library Admin</field>
+        <field name="category_id" ref="school360_base.module_category_school360"/>
+    </record>
+
+    <record id="group_library_staff" model="res.groups">
+        <field name="name">Library Staff</field>
+        <field name="category_id" ref="school360_base.module_category_school360"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_library_category_admin,library.category admin,model_library_category,school360_library.group_library_admin,1,1,1,1
+access_library_category_staff,library.category staff,model_library_category,school360_library.group_library_staff,1,0,0,0
+
+access_library_book_admin,library.book admin,model_library_book,school360_library.group_library_admin,1,1,1,1
+access_library_book_staff,library.book staff,model_library_book,school360_library.group_library_staff,1,0,0,0
+
+access_library_copy_admin,library.copy admin,model_library_copy,school360_library.group_library_admin,1,1,1,1
+access_library_copy_staff,library.copy staff,model_library_copy,school360_library.group_library_staff,1,0,0,0
+
+access_library_borrow_admin,library.borrow admin,model_library_borrow,school360_library.group_library_admin,1,1,1,1
+access_library_borrow_staff,library.borrow staff,model_library_borrow,school360_library.group_library_staff,1,1,1,0

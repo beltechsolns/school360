@@ -1,0 +1,8 @@
+<odoo>
+    <record id="seq_library_copy" model="ir.sequence">
+        <field name="name">Library Copy</field>
+        <field name="code">library.copy</field>
+        <field name="prefix">COPY/</field>
+        <field name="padding">4</field>
+    </record>
+</odoo>
