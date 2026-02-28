@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_portal_student,access_portal_student,model_portal_student,group_portal_student,1,0,0,0
+access_portal_attendance,access_portal_attendance,model_portal_attendance,group_portal_student,1,0,0,0
+access_portal_fees,access_portal_fees,model_portal_fees,group_portal_student,1,0,0,0
+access_portal_library,access_portal_library,model_portal_library,group_portal_student,1,0,0,0
+access_portal_admission,access_portal_admission,model_portal_admission,group_portal_student,1,0,0,0

@@ -1,0 +1,10 @@
+<odoo>
+    <menuitem id="menu_student_admission_root" name="Student Admission"
+                  web_icon="school360_students,static/description/icon.png"
+                  sequence="10"/>
+        <menuitem id="menu_student_admission" name="Admission"
+                  parent="menu_student_admission_root" action="action_student_admission" sequence="15"/>
+
+        <menuitem id="menu_student_admission_attachment" name="Admission Attachment"
+                  parent="menu_student_admission_root" action="action_student_admission_attachment" sequence="20" />
+</odoo>

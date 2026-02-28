@@ -2,6 +2,7 @@
     <!-- Root menu for Attendance under School360 -->
     <menuitem id="menu_school360_attendance_root"
               name="Attendance"
+              web_icon="school360_students,static/description/icon.png"
               sequence="10"/>
 
     <!-- Attendance Sessions -->

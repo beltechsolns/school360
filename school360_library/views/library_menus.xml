@@ -3,7 +3,9 @@
     <!-- Root Menu -->
     <menuitem id="menu_school360_library_root"
               name="Library"
-              sequence="40"/>
+              web_icon="school360_students,static/description/icon.png"
+              sequence="40"
+    />
 
     <!-- Submenus -->
     <menuitem id="menu_library_books"

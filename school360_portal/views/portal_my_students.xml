@@ -1,0 +1,113 @@
+<odoo>
+    <template id="portal_my_students" name="My Students">
+        <t t-call="portal.portal_layout">
+            <div class="container mt-5">
+                <!-- Page Header -->
+                <div class="row mb-4 text-center">
+                    <div class="col">
+                        <h2 class="fw-bold mb-1" style="color: #0d6efd;">My Students</h2>
+                        <p class="text-muted">
+                            Total Students: <t t-esc="len(students) if students else 0"/>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Students Cards -->
+                <div class="row g-4">
+                    <t t-if="students">
+                        <t t-foreach="students" t-as="student">
+                            <div class="col-md-3">
+                                <div class="card shadow-sm border-0 h-100 hover-shadow">
+                                    <!-- Card Header -->
+                                    <div class="card-header text-center py-3" style="background-color: #e6f3ff; border-bottom: 1px solid #cce7ff;">
+                                        <t t-if="student.photo">
+                                            <img t-att-src="'/web/image/student.student/%s/photo' % student.id"
+                                                 class="rounded-circle border border-2 border-primary mb-2"
+                                                 style="width:100px; height:100px; object-fit:cover;"
+                                                 alt="Student Photo"/>
+                                        </t>
+                                        <t t-else="">
+                                            <img src="/school360_portal/static/src/img/placeholder.png"
+                                                 class="rounded-circle border border-2 border-primary mb-2"
+                                                 style="width:100px; height:100px; object-fit:cover;"
+                                                 alt="No Photo"/>
+                                        </t>
+                                        <h5 class="fw-bold mb-1"><t t-esc="student.name or 'Unnamed Student'"/></h5>
+                                        <div class="mb-1">
+                                            <span class="badge bg-primary me-1">
+                                                <i class="bi bi-mortarboard me-1"></i>
+                                                <t t-if="student.grade_id and student.grade_id.exists()">
+                                                    <t t-esc="student.grade_id.name"/>
+                                                </t>
+                                                <t t-else="">Grade N/A</t>
+                                            </span>
+                                            <span class="badge bg-secondary">
+                                                <i class="bi bi-columns-gap me-1"></i>
+                                                <t t-if="student.section_id and student.section_id.exists()">
+                                                    <t t-esc="student.section_id.name"/>
+                                                </t>
+                                                <t t-else="">Section N/A</t>
+                                            </span>
+                                        </div>
+                                        <!-- Status -->
+                                        <t t-if="student.status == 'active'">
+                                            <span class="badge bg-success">Active</span>
+                                        </t>
+                                        <t t-elif="student.status == 'draft'">
+                                            <span class="badge bg-warning text-dark">Draft</span>
+                                        </t>
+                                        <t t-else="">
+                                            <span class="badge bg-secondary text-white">
+                                                <t t-esc="student.status.capitalize()"/>
+                                            </span>
+                                        </t>
+                                    </div>
+
+                                    <!-- Card Body: Buttons -->
+                                    <div class="card-body d-flex justify-content-center flex-wrap gap-2 mt-3">
+                                        <a t-att-href="'/portal/student/%s/profile' % student.id"
+                                           class="btn btn-primary btn-sm text-white shadow-sm">
+                                            <i class="bi bi-person-circle me-1"></i>Profile
+                                        </a>
+                                        <a t-att-href="'/portal/student/%s/attendance' % student.id"
+                                           class="btn btn-success btn-sm text-white shadow-sm">
+                                            <i class="bi bi-check2-square me-1"></i>Attendance
+                                        </a>
+                                        <a t-att-href="'/portal/student/%s/fees' % student.id"
+                                           class="btn btn-info btn-sm text-white shadow-sm">
+                                            <i class="bi bi-wallet2 me-1"></i>Fees
+                                        </a>
+                                        <a t-att-href="'/portal/student/%s/library' % student.id"
+                                           class="btn btn-warning btn-sm text-dark shadow-sm">
+                                            <i class="bi bi-book me-1"></i>Library
+                                        </a>
+                                        <a t-att-href="'/portal/student/%s/admission' % student.id"
+                                           class="btn btn-dark btn-sm text-white shadow-sm">
+                                            <i class="bi bi-file-earmark-check me-1"></i>Admission
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                    <!-- No Students Case -->
+                    <t t-else="">
+                        <div class="col-12 text-center">
+                            <div class="alert alert-info">
+                                No students linked to your account.
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+
+            <!-- Custom Card CSS -->
+            <style>
+                .hover-shadow:hover {
+                    box-shadow: 0 0.5rem 1rem rgba(0, 123, 255, 0.25) !important;
+                    transition: all 0.3s ease-in-out;
+                }
+            </style>
+        </t>
+    </template>
+</odoo>

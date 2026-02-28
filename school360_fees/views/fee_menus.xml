@@ -1,0 +1,34 @@
+<odoo>
+
+    <!-- Fees Root -->
+    <menuitem id="menu_fees_root"
+              name="Fees Management"
+              sequence="10"
+              web_icon="school360_students,static/description/icon.png"
+              groups="school360_base.group_school_finance_officer"/>
+
+    <!-- Fee Structures -->
+    <menuitem id="menu_fee_structures"
+              name="Fee Structures"
+              parent="menu_fees_root"
+              action="action_fees_structure"
+              sequence="1"
+              groups="school360_base.group_school_finance_officer"/>
+
+    <!-- Student Fees -->
+    <menuitem id="menu_student_fees"
+              name="Student Fees"
+              parent="menu_fees_root"
+              action="action_fees"
+              sequence="2"
+              groups="school360_base.group_school_finance_officer"/>
+
+    <!-- Payments -->
+    <menuitem id="menu_fee_payments"
+              name="Payments"
+              parent="menu_fees_root"
+              action="action_fees_payment"
+              sequence="3"
+              groups="school360_base.group_school_finance_officer"/>
+
+</odoo>

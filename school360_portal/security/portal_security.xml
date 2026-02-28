@@ -1,0 +1,6 @@
+<odoo>
+    <record id="group_portal_student" model="res.groups">
+        <field name="name">Portal Student/Parent</field>
+        <field name="category_id" ref="school360_base.module_category_school360"/>
+    </record>
+</odoo>

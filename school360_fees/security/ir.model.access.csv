@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_fees_structure_finance,fees.structure.finance,model_school360_fees_structure,school360_base.group_school_finance_officer,1,1,1,1
+access_fees_finance,fees.finance,model_school360_fees,school360_base.group_school_finance_officer,1,1,1,1
+access_payment_finance,payment.finance,model_school360_fees_payment,school360_base.group_school_finance_officer,1,1,1,1

@@ -1,0 +1,47 @@
+<odoo>
+    <template id="portal_student_admission" name="Admission Status">
+        <t t-call="portal.portal_layout">
+            <div class="container mt-5">
+                <!-- Header -->
+                <div class="row mb-4">
+                    <div class="col text-center">
+                        <h3 style="color: #0d6efd;">
+                            <i class="bi bi-file-earmark-check me-2"></i>Application Status
+                        </h3>
+                        <p class="text-muted">Track your admission progress</p>
+                    </div>
+                </div>
+
+                <!-- Status Card -->
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card shadow-sm p-4"
+                             style="border-left: 6px solid #0d6efd; border-radius: 0.75rem;">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-info-circle-fill text-primary fs-1 me-3"></i>
+                                <div>
+                                    <h5 class="mb-2">Current Status</h5>
+                                    <p class="fs-5 fw-bold text-primary mb-0">
+                                        <t t-esc="application.status"/>
+                                    </p>
+                                    <t t-if="application.notes">
+                                        <small class="text-muted">Notes: <t t-esc="application.notes"/></small>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Back Button -->
+                <div class="row mt-4">
+                    <div class="col text-center">
+                        <a t-att-href="'/portal/dashboard'" class="btn btn-primary shadow-sm">
+                            <i class="bi bi-arrow-left me-1"></i>Back to Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
