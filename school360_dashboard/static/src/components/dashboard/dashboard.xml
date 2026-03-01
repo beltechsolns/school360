@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
     <t t-name="school360_dashboard.DashboardMain">
-        <div class="o_school360_dashboard">
-            <!-- STATIC SIDEBAR -->
+        <div t-attf-class="o_school360_dashboard #{state.isDarkMode ? 'dark-mode' : ''}">
+            
             <div class="dashboard_sidebar">
                 <div class="sidebar_logo"><i class="fa fa-graduation-cap"/> SCHOOL 360</div>
                 <div class="user_profile_section">
@@ -18,7 +18,8 @@
                     <div class="profile_email"><t t-esc="state.data.user.email or ''"/></div>
                 </div>
                 <ul class="sidebar_nav">
-                    <li t-att-class="{'active': state.activeTab === 'base'}" t-on-click="() => this.setTab('base')"><i class="fa fa-home"/> home</li>
+                    <li t-att-class="{'active': state.activeTab === 'base'}" t-on-click="() => this.setTab('base')"><i class="fa fa-home"/> home</li>                 
+                    <li t-att-class="{'active': state.activeTab === 'finance'}" t-on-click="() => this.setTab('finance')"><i class="fa fa-money"/> finance</li>
                     <li t-att-class="{'active': state.activeTab === 'academic'}" t-on-click="() => this.setTab('academic')"><i class="fa fa-university"/> academic</li>
                     <li t-att-class="{'active': state.activeTab === 'admission'}" t-on-click="() => this.setTab('admission')"><i class="fa fa-bullhorn"/> admission</li>
                     <li t-att-class="{'active': state.activeTab === 'students'}" t-on-click="() => this.setTab('students')"><i class="fa fa-users"/> students</li>
@@ -29,7 +30,6 @@
             </div>
 
             <div class="dashboard_body">
-                <!-- TOP FILTER BAR -->
                 <div class="dashboard_filter_bar">
                     <div class="filter_group">
                         <label>Academic Year</label>
@@ -69,24 +69,45 @@
                             </t>
                         </select>
                     </div>
-                    <div t-if="state.isLoading" class="ms-auto pt-3">
+
+                    <div class="theme_toggle_wrapper" t-on-click="toggleDarkMode">
+                        <div t-attf-class="theme_toggle_pill #{state.isDarkMode ? 'active' : ''}">
+                            <div class="toggle_knob">
+                                <i t-attf-class="fa #{state.isDarkMode ? 'fa-moon-o' : 'fa-sun-o'}"/>
+                            </div>
+                            <span class="toggle_label">
+                                <t t-esc="state.isDarkMode ? 'NIGHT MODE' : 'LIGHT MODE'"/>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div t-if="state.isLoading" class="filter_loader">
                         <i class="fa fa-circle-o-notch fa-spin text-primary"/> Loading...
                     </div>
                 </div>
 
-                <!-- MAIN TAB CONTENT -->
                 <div class="tab_content" t-if="!state.isLoading">
-                    
                     <!-- 1. HOME TAB -->
                     <div t-if="state.activeTab === 'base'">
                         <div class="kpi_flexible_row">
-                            <div class="kpi_card border_blue"><div class="kpi_data"><div class="kpi_title">Earnings</div><div class="kpi_value"><t t-esc="state.data.overview.earnings"/></div></div><div class="kpi_icon text_blue"><i class="fa fa-dollar"/></div></div>
-                            <div class="kpi_card border_orange"><div class="kpi_data"><div class="kpi_title">Students</div><div class="kpi_value"><t t-esc="state.data.overview.students"/></div></div><div class="kpi_icon text_orange"><i class="fa fa-users"/></div></div>
-                            <div class="kpi_card border_green"><div class="kpi_data"><div class="kpi_title">Staff</div><div class="kpi_value"><t t-esc="state.data.overview.staff"/></div></div><div class="kpi_icon text_green"><i class="fa fa-id-card"/></div></div>
-                            <div class="kpi_card border_teal"><div class="kpi_data"><div class="kpi_title">Attendance</div><div class="kpi_value"><t t-esc="state.data.overview.attendance_rate"/>%</div></div><div class="kpi_icon text_teal"><i class="fa fa-star"/></div></div>
+                            <div class="kpi_card border_blue clickable"><div class="kpi_data"><div class="kpi_title">Earnings</div><div class="kpi_value"><t t-esc="state.data.overview.earnings"/></div></div><div class="kpi_icon text_blue"><i class="fa fa-dollar"/></div></div>
+                            <div class="kpi_card border_orange clickable"><div class="kpi_data"><div class="kpi_title">Students</div><div class="kpi_value"><t t-esc="state.data.overview.students"/></div></div><div class="kpi_icon text_orange"><i class="fa fa-users"/></div></div>
+                            <div class="kpi_card border_green clickable"><div class="kpi_data"><div class="kpi_title">Staff</div><div class="kpi_value"><t t-esc="state.data.overview.staff"/></div></div><div class="kpi_icon text_green"><i class="fa fa-id-card"/></div></div>
+                            <div class="kpi_card border_teal clickable"><div class="kpi_data"><div class="kpi_title">Attendance</div><div class="kpi_value"><t t-esc="state.data.overview.attendance_rate"/>%</div></div><div class="kpi_icon text_teal"><i class="fa fa-star"/></div></div>
                         </div>
+
                         <div class="row">
-                            <div class="col-md-8"><div t-attf-class="chart_card #{(!state.data.overview.earnings_series or state.data.overview.earnings_series.data.length == 0) ? 'empty_chart' : ''}"><h5>Financial Performance</h5><canvas id="homeLine"/></div></div>
+                            <div class="col-md-8">
+                                <div t-attf-class="chart_card #{(!state.data.overview.earnings_series or state.data.overview.earnings_series.data.length == 0) ? 'empty_chart' : ''}">
+                                    <h5>Financial Performance</h5>
+                                    <canvas id="homeLine"/>
+                                </div>
+
+                                <div class="chart_card calendar_card mt-4">
+                                    <h5>Academic &amp; School Calendar</h5>
+                                    <div id="homeCalendarWidget" class="dashboard_calendar_container"></div>
+                                </div>
+                            </div>
                             <div class="col-md-4">
                                 <div t-attf-class="chart_card mb-3 #{(!state.data.students.status_chart or state.data.students.status_chart.data.length == 0) ? 'empty_chart' : ''}" style="height:175px"><h5>Student Mix</h5><canvas id="homePie"/></div>
                                 <div t-attf-class="chart_card is_bar #{(!state.data.staff.dept_chart or state.data.staff.dept_chart.data.length == 0) ? 'empty_chart' : ''}" style="height:175px"><h5>Staff by Dept</h5><canvas id="homeBar"/></div>
@@ -94,7 +115,31 @@
                         </div>
                     </div>
 
-                    <!-- 2. STUDENTS TAB -->
+                    <!-- 2. FINANCE TAB -->
+                    <div t-if="state.activeTab === 'finance'">
+                        <div class="kpi_flexible_row">
+                            <div class="kpi_card border_blue"><div class="kpi_data"><div class="kpi_title">Total Revenue</div><div class="kpi_value"><t t-esc="state.data.finance.total_revenue"/></div></div><div class="kpi_icon text_blue"><i class="fa fa-calculator"/></div></div>
+                            <div class="kpi_card border_green"><div class="kpi_data"><div class="kpi_title">Total Paid</div><div class="kpi_value"><t t-esc="state.data.finance.paid"/></div></div><div class="kpi_icon text_green"><i class="fa fa-check-circle"/></div></div>
+                            <div class="kpi_card border_orange"><div class="kpi_data"><div class="kpi_title">Total Due</div><div class="kpi_value"><t t-esc="state.data.finance.due"/></div></div><div class="kpi_icon text_orange"><i class="fa fa-exclamation-triangle"/></div></div>
+                            <div class="kpi_card border_teal"><div class="kpi_data"><div class="kpi_title">Collection Rate</div><div class="kpi_value"><t t-esc="state.data.finance.collection_rate"/>%</div></div><div class="kpi_icon text_teal"><i class="fa fa-percent"/></div></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div t-attf-class="chart_card #{(!state.data.finance.status_pie or state.data.finance.status_pie.data.length == 0) ? 'empty_chart' : ''}">
+                                    <h5>Collection Efficiency (Collected vs Outstanding)</h5>
+                                    <canvas id="financeStatusPie"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div t-attf-class="chart_card is_bar #{(!state.data.finance.method_chart or state.data.finance.method_chart.data.length == 0) ? 'empty_chart' : ''}">
+                                    <h5>Collection by Payment Method</h5>
+                                    <canvas id="financeMethodBar"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. STUDENTS TAB -->
                     <div t-if="state.activeTab === 'students'">
                         <div class="kpi_flexible_row">
                             <div class="kpi_card border_blue"><div class="kpi_data"><div class="kpi_title">TOTAL</div><div class="kpi_value" t-esc="state.data.students.total"/></div></div>
@@ -108,7 +153,7 @@
                         </div>
                     </div>
 
-                    <!-- 3. ACADEMIC TAB -->
+                    <!-- 4. ACADEMIC TAB -->
                     <div t-if="state.activeTab === 'academic'">
                         <div class="kpi_flexible_row">
                              <div class="kpi_card border_blue"><div class="kpi_data"><div class="kpi_title">Grades</div><div class="kpi_value" t-esc="state.data.academic.grades_count"/></div></div>
@@ -120,7 +165,7 @@
                         </div>
                     </div>
 
-                    <!-- 4. ADMISSION TAB -->
+                    <!-- 5. ADMISSION TAB -->
                     <div t-if="state.activeTab === 'admission'">
                         <div class="kpi_flexible_row">
                             <div class="kpi_card border_teal"><div class="kpi_data"><div class="kpi_title">Total Applications</div><div class="kpi_value" t-esc="state.data.admission.total"/></div></div>
@@ -131,7 +176,7 @@
                         </div>
                     </div>
 
-                    <!-- 5. ATTENDANCE TAB -->
+                    <!-- 6. ATTENDANCE TAB -->
                     <div t-if="state.activeTab === 'attendance'">
                         <div class="kpi_flexible_row">
                             <div class="kpi_card border_green"><div class="kpi_data"><div class="kpi_title">Present</div><div class="kpi_value" t-esc="state.data.attendance.present"/></div></div>
@@ -143,7 +188,7 @@
                         </div>
                     </div>
 
-                    <!-- 6. STAFF TAB -->
+                    <!-- 7. STAFF TAB -->
                     <div t-if="state.activeTab === 'staff'">
                          <div class="kpi_flexible_row">
                             <div class="kpi_card border_blue"><div class="kpi_data"><div class="kpi_title">Total Staff</div><div class="kpi_value" t-esc="state.data.staff.total"/></div></div>
@@ -155,7 +200,7 @@
                         </div>
                     </div>
 
-                    <!-- 7. LIBRARY TAB -->
+                    <!-- 8. LIBRARY TAB -->
                     <div t-if="state.activeTab === 'library'">
                         <div class="kpi_flexible_row">
                             <div class="kpi_card border_blue"><div class="kpi_data"><div class="kpi_title">Books</div><div class="kpi_value" t-esc="state.data.library.total_books"/></div></div>
@@ -169,9 +214,9 @@
                     </div>
                 </div>
 
-                <div t-else="" class="text-center mt-5">
+                <div t-else="" class="dashboard_loading_overlay">
                     <div class="spinner-border text-primary" role="status"></div>
-                    <p class="mt-2 text-muted">Analyzing school data...</p>
+                    <p>Analyzing school data...</p>
                 </div>
 
                 <footer class="dashboard_footer">

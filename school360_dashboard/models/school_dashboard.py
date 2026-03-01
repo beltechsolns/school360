@@ -46,13 +46,11 @@ class SchoolDashboard(models.Model):
         company = self.env.company
         user = self.env.user
         filters = filters or {}
-        
-        # --- Build Domains ---
+        currency_symbol = company.currency_id.symbol or '$'
         base_domain = [('company_id', '=', company.id)]
         student_domain = list(base_domain)
         attendance_domain = [('session_id.company_id', '=', company.id)]
 
-        # Apply Filters Safely
         if filters.get('year_id'):
             y_id = int(filters['year_id'])
             student_domain.append(('academic_year_id', '=', y_id))
@@ -89,10 +87,29 @@ class SchoolDashboard(models.Model):
         # Financials
         total_paid = 0
         total_due = 0
-        if 'fees.fees' in self.env.registry:
-            fees = self.env['fees.fees'].search(base_domain)
+        total_revenue = 0
+        collection_rate = 0
+        pay_method_chart = {"labels": [], "data": []}
+
+        if 'school360.fees' in self.env.registry:
+            fee_domain = list(base_domain)
+            if filters.get('grade_id'):
+                fee_domain.append(('structure_id.grade_id', '=', int(filters['grade_id'])))
+            
+            fees = self.env['school360.fees'].search(fee_domain)
+            total_revenue = sum(fees.mapped('total_amount'))
             total_paid = sum(fees.mapped('amount_paid'))
-            total_due = sum(fees.mapped('amount_remaining'))
+            total_due = sum(fees.mapped('amount_due'))
+            collection_rate = round((total_paid / total_revenue * 100), 1) if total_revenue > 0 else 0
+
+            if 'school360.fees.payment' in self.env.registry:
+                pay_domain = [('fee_id', 'in', fees.ids)]
+                pay_groups = self.env['school360.fees.payment'].read_group(pay_domain, ['payment_method', 'amount'], ['payment_method'])
+                selection_dict = dict(self.env['school360.fees.payment']._fields['payment_method'].selection)
+                pay_method_chart = {
+                    "labels": [selection_dict.get(g['payment_method'], 'Other') for g in pay_groups if g['payment_method']],
+                    "data": [g['amount'] for g in pay_groups if g['payment_method']]
+                }
 
         # Attendance
         att_ratio = 0
@@ -112,7 +129,8 @@ class SchoolDashboard(models.Model):
                 "staff": get_count('hr.employee', base_domain),
                 "attendance_rate": att_ratio,
                 "earnings": f"${total_paid:,.0f}",
-                "earnings_series": {"labels": ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb'], "data": [200, 450, 300, 628, 400, 500]}
+                "earnings_series": {"labels": ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb'], "data": [200, 450, 300, 628, 400, 500]},
+                "calendar_events": [] 
             },
             "students": {
                 "total": get_count('school360.student', student_domain),
@@ -150,9 +168,12 @@ class SchoolDashboard(models.Model):
                 "cat_chart": get_group_data('library.book', 'category_id', base_domain)
             },
             "finance": {
-                "paid": total_paid,
-                "due": total_due,
-                "chart": {"labels": ["Paid", "Outstanding"], "data": [total_paid, total_due]}
+                "total_revenue": f"{currency_symbol}{total_revenue:,.0f}",
+                "paid": f"{currency_symbol}{total_paid:,.0f}",
+                "due": f"{currency_symbol}{total_due:,.0f}",
+                "collection_rate": collection_rate,
+                "method_chart": pay_method_chart,
+                "status_pie": {"labels": ["Collected", "Outstanding"], "data": [total_paid, total_due]}
             },
             "admission": {
                 "total": get_count('student.admission', base_domain),

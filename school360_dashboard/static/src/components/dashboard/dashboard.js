@@ -10,10 +10,11 @@ export class School360Dashboard extends Component {
     setup() {
         this.orm = useService("orm");
         this.action = useService("action");
-        
+        const savedTheme = localStorage.getItem('school360_theme');
         this.state = useState({
             activeTab: 'base',
             isLoading: true,
+            isDarkMode: savedTheme === 'dark',
             filters: {
                 year_id: "",
                 grade_id: "",
@@ -35,7 +36,7 @@ export class School360Dashboard extends Component {
                 attendance: { grade_bar: { data: [] }, period_pie: { data: [] } },
                 staff: { dept_chart: { data: [] }, job_pie: { data: [] } },
                 library: { status_bar: { data: [] }, cat_chart: { data: [] } },
-                finance: { chart: { data: [] } }
+                finance: { status_pie: { data: [] }, method_chart: { data: [] } }
             }
         });
         
@@ -43,10 +44,8 @@ export class School360Dashboard extends Component {
 
         onWillStart(async () => {
             await loadJS("/web/static/lib/Chart/Chart.js");
-            // Load Filter Dropdowns
             const options = await this.orm.call("school360.dashboard", "get_filter_options", []);
             this.state.filterOptions = options;
-            // Load Initial Stats
             await this.loadStats();
         });
 
@@ -56,6 +55,11 @@ export class School360Dashboard extends Component {
             }
             return () => this.destroyCharts();
         }, () => [this.state.activeTab, this.state.data, this.state.isLoading]);
+    }
+
+    toggleDarkMode() {
+        this.state.isDarkMode = !this.state.isDarkMode;
+        localStorage.setItem('school360_theme', this.state.isDarkMode ? 'dark' : 'light');
     }
 
     async loadStats() {
@@ -92,9 +96,10 @@ export class School360Dashboard extends Component {
             this.initChart('homeLine', 'line', d.overview.earnings_series, '#4e73df', 'Earnings');
             this.initChart('homePie', 'pie', d.students.status_chart, null, 'Student Mix');
             this.initChart('homeBar', 'bar', d.staff.dept_chart, '#1cc88a', 'Staff by Dept');
-        } else if (this.state.activeTab === 'students') {
-            this.initChart('studentBarChart', 'bar', d.students.grade_chart, '#4e73df', 'Students');
-            this.initChart('studentPieChart', 'doughnut', d.students.status_chart, null, 'Status');
+            this.renderCalendar('homeCalendarWidget');
+        } else if (this.state.activeTab === 'finance') {
+            this.initChart('financeStatusPie', 'pie', d.finance.status_pie, ['#1cc88a', '#e74a3b'], 'Revenue Status');
+            this.initChart('financeMethodBar', 'bar', d.finance.method_chart, '#4e73df', 'Collection by Method');
         } else if (this.state.activeTab === 'academic') {
             this.initChart('academicBar', 'bar', d.academic.grade_bar, '#36b9cc', 'Sections');
             this.initChart('academicPie', 'pie', d.academic.subject_pie, null, 'Subjects');
@@ -113,6 +118,31 @@ export class School360Dashboard extends Component {
         }
     }
 
+     renderCalendar(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        
+        const now = new Date();
+        const month = now.toLocaleString('default', { month: 'long' });
+        const year = now.getFullYear();
+        const daysInMonth = new Date(year, now.getMonth() + 1, 0).getDate();
+        const firstDay = new Date(year, now.getMonth(), 1).getDay();
+
+        let html = `<div class="calendar_header"><strong>${month} ${year}</strong></div>`;
+        html += `<table class="calendar_table"><thead><tr>`;
+        ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(d => html += `<th>${d}</th>`);
+        html += `</tr></thead><tbody><tr>`;
+
+        for (let i = 0; i < firstDay; i++) html += `<td></td>`;
+        for (let day = 1; day <= daysInMonth; day++) {
+            if ((day + firstDay - 1) % 7 === 0 && day !== 1) html += `</tr><tr>`;
+            const isToday = day === now.getDate() ? 'today' : '';
+            html += `<td class="${isToday}">${day}</td>`;
+        }
+        html += `</tr></tbody></table>`;
+        container.innerHTML = html;
+    }
+
     initChart(id, type, chartData, color = null, labelName = 'Data') {
         const el = document.getElementById(id);
         if (el && chartData && chartData.data && Array.isArray(chartData.data) && chartData.data.length > 0) {
@@ -128,7 +158,15 @@ export class School360Dashboard extends Component {
                         tension: 0.4
                     }]
                 },
-                options: { responsive: true, maintainAspectRatio: false }
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false,
+                    legend: {
+                        labels: {
+                            fontColor: this.state.isDarkMode ? '#cbd5e0' : '#666'
+                        }
+                    }
+                }
             };
             this.chartInstances.push(new Chart(el, config));
         }
