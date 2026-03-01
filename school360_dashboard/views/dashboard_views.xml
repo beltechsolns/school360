@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_school360_smart_dashboard" model="ir.actions.client">
+        <field name="name">Dashboard</field>
+        <field name="tag">school360_dashboard_main</field>
+    </record>
+    <menuitem id="menu_school360_dashboard_root"
+              name="School360 Dashboard"
+              web_icon="school360_dashboard,static/description/icon.png"
+              groups="group_school_admin,group_principal,group_finance_officer,group_hr_officer,group_teacher"
+              sequence="1"/>
+    <menuitem id="menu_school360_dashboard_smart"
+              name="Dashboard"
+              parent="menu_school360_dashboard_root"
+              action="action_school360_smart_dashboard"
+              sequence="1"/>
+</odoo>

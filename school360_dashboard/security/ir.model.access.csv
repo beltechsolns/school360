@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_school360_dashboard_admin,school360.dashboard.admin,model_school360_dashboard,group_school_admin,1,1,1,1
+access_school360_dashboard_principal,school360.dashboard.prin,model_school360_dashboard,group_principal,1,0,0,0
+access_school360_dashboard_finance,school360.dashboard.fin,model_school360_dashboard,group_finance_officer,1,0,0,0
+access_school360_dashboard_hr,school360.dashboard.hr,model_school360_dashboard,group_hr_officer,1,0,0,0
+access_school360_dashboard_teacher,school360.dashboard.teach,model_school360_dashboard,group_teacher,1,0,0,0
+access_school360_dashboard_parent,school360.dashboard.parent,model_school360_dashboard,group_parent,1,0,0,0
